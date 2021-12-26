@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Input Check</title>
+		<script src="Vue3.js">
+		</script>
+		<style type="text/css">
+			.x{
+				width: 200px;
+				height: 200px;
+				background-color: blue;
+				color: navajowhite;
+			}
+			.y{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+			.z{
+				width: 50px;
+				height: 50px;
+				background-color: mediumpurple;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="x">
+			<input v-model="cont" />
+			<br>
+			{{context}}
+		</div>
+		<script type="text/javascript">
+			Vue.createApp({
+				data(){
+					return {
+						// "context":"",
+						"cont":""
+					}
+				},
+				"methods": {
+					
+					
+				},
+				"computed":{
+					context(){
+						if(this.cont.length<6){
+							return "input at least 6 chars";
+						}
+						else if(this.cont.length>10){
+							return "too long";
+						}
+						else{
+							return "ok";
+						}
+					}
+				}
+			}).mount('#x');
+			
+		</script>
+
+
+
+
+	</body>
+</html>
