@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Input Check</title>
+		<script src="Vue3.js">
+		</script>
+		<style type="text/css">
+			.x{
+				width: 200px;
+				height: 200px;
+				background-color: blue;
+				color: navajowhite;
+			}
+			.y{
+				margin-left: 300px;
+			}
+			.z{
+				width: 50px;
+				height: 50px;
+				background-color: mediumpurple;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="x">
+			<button type="button" @click="fa">parent</button>
+			<br>
+			<p>父原始数据：{{parmsg}}</p>
+			<p>子组件传上来：{{uponmsg}}</p>
+			<br>
+			<ztag @go="fn" :downedmsg="commsg"></ztag>
+		</div>
+		<script type="text/javascript">
+			Vue.createApp({
+				data(){
+					return {
+						"parmsg":"父原始数据",
+						"uponmsg":"",
+						"downmsg":"我是父级传来的",
+						"num":0
+					}
+				},
+				"methods":{
+					fn(up){
+						this.uponmsg = up;
+					},
+					fa(){
+						this.num++;
+					},
+					go(){
+						
+					}
+				},
+				"computed":{
+					commsg(){
+						if(this.num != 0){
+							return this.downmsg;
+						}
+						else{
+							return "";
+						}
+					}
+				}
+			}).component('ztag',{
+				data(){
+					return {
+						"chilmsg":"子原始数据",
+						"upmsg":"我是子级传来的",
+						
+					}
+				},
+				"methods":{
+					fm(){
+						this.$emit("go",this.upmsg);
+					}
+				},
+				"props":["downedmsg","go"],
+				"template":`
+					<button type="button" @click="fm">child</button>
+					<p>子原始数据：{{chilmsg}}</p>
+					<p>父级传上来：{{downedmsg}}</p>
+				`
+			}).mount('#x');
+		</script>
+	</body>
+</html>
